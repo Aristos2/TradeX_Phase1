@@ -1,0 +1,321 @@
+/* ── Navbar Layout ─────────────────────────────────────── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  background: #ffffff;
+  border-bottom: 0.5px solid #e5e5e5;
+  font-family: system-ui, -apple-system, sans-serif;
+  position: relative;
+  z-index: 50;
+}
+
+/* ── Left: Logo ─────────────────────────────────────────── */
+.navbar__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar__logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #178051;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__logo-letter {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.navbar__logo-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #111111;
+}
+
+.navbar__logo-name span {
+  color: #178051;
+}
+
+/* ── Center: Nav Links ───────────────────────────────────── */
+.navbar__center {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #666666;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover {
+  background: #f5f5f5;
+  color: #111111;
+}
+
+.nav-link.active {
+  background: #edf7f1;
+  color: #178051;
+  font-weight: 500;
+}
+
+.nav-link__icon {
+  font-size: 15px;
+}
+
+/* ── Right: Actions ──────────────────────────────────────── */
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar__divider {
+  width: 0.5px;
+  height: 24px;
+  background: #e5e5e5;
+}
+
+/* ── Notification Button ─────────────────────────────────── */
+.notif-btn {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 0.5px solid #e5e5e5;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.15s;
+}
+
+.notif-btn:hover {
+  background: #f5f5f5;
+}
+
+.notif-btn__badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  min-width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  background: #e24b4a;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ffffff;
+  padding: 0 3px;
+}
+
+/* ── Notification Panel ──────────────────────────────────── */
+.notif-panel {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  width: 280px;
+  background: #ffffff;
+  border: 0.5px solid #e5e5e5;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 100;
+}
+
+.notif-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 0.5px solid #e5e5e5;
+}
+
+.notif-panel__title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111111;
+}
+
+.notif-panel__mark-all {
+  font-size: 11px;
+  color: #178051;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 0.5px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.notif-item:hover {
+  background: #f9f9f9;
+}
+
+.notif-item__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.notif-item__dot--unread {
+  background: #178051;
+}
+
+.notif-item__dot--read {
+  background: transparent;
+  border: 1px solid #cccccc;
+}
+
+.notif-item__text {
+  font-size: 12px;
+  color: #111111;
+  line-height: 1.5;
+}
+
+.notif-item__time {
+  font-size: 11px;
+  color: #888888;
+  margin-top: 2px;
+}
+
+/* ── Profile Button ──────────────────────────────────────── */
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 8px;
+  border: 0.5px solid #e5e5e5;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.profile-btn:hover {
+  background: #f5f5f5;
+}
+
+.profile-btn__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #178051;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.profile-btn__name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111111;
+  line-height: 1.2;
+}
+
+.profile-btn__sub {
+  font-size: 11px;
+  color: #888888;
+}
+
+.profile-btn__chevron {
+  font-size: 12px;
+  color: #888888;
+}
+
+/* ── Profile Dropdown ────────────────────────────────────── */
+.dropdown {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  width: 200px;
+  background: #ffffff;
+  border: 0.5px solid #e5e5e5;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 100;
+}
+
+.dropdown__header {
+  padding: 12px 14px 10px;
+  border-bottom: 0.5px solid #e5e5e5;
+}
+
+.dropdown__name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111111;
+}
+
+.dropdown__email {
+  font-size: 11px;
+  color: #888888;
+  margin-top: 2px;
+}
+
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  font-size: 13px;
+  color: #555555;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.dropdown__item:hover {
+  background: #f5f5f5;
+  color: #111111;
+}
+
+.dropdown__item--danger {
+  color: #e24b4a;
+}
+
+.dropdown__item--danger:hover {
+  background: #fff0f0;
+}
+
+.dropdown__separator {
+  height: 0.5px;
+  background: #e5e5e5;
+  margin: 4px 0;
+}
