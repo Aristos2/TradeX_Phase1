@@ -1,11 +1,13 @@
-import React from 'react'
-
 const Dashboard = () => {
   return (
-    <div>
+    <div style={{
+      color: "red",
+      fontSize: "50px",
+      padding: "50px"
+    }}>
       Dashboard
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
