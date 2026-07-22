@@ -1,5 +1,6 @@
 package com.spb.tradeX.service.impl;
 
+import com.spb.tradeX.Security.JwtService;
 import com.spb.tradeX.dto.LoginRequest;
 import com.spb.tradeX.dto.LoginResponse;
 import com.spb.tradeX.dto.RegisterRequest;
@@ -7,16 +8,21 @@ import com.spb.tradeX.dto.UserResponse;
 import com.spb.tradeX.model.User;
 import com.spb.tradeX.repository.UserRepository;
 import com.spb.tradeX.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserResponse register(RegisterRequest request) {
@@ -28,7 +34,7 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                 .fullName(request.getFullName())
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .mobile(request.getMobile())
                 .build();
 
@@ -40,17 +46,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public LoginResponse login(LoginRequest request) {
 
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
 
-        if (!user.getPassword().equals(request.getPassword())) {
-            throw new RuntimeException("Invalid email or password");
-        }
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User Is not Database"));
+
+        String token = jwtService.generateToken(user);
 
         UserResponse userResponse = mapToUserResponse(user);
 
         return LoginResponse.builder()
                 .message("Login successful")
+                .token(token)
                 .user(userResponse)
                 .build();
     }

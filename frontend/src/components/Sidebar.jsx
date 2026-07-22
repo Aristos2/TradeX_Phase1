@@ -3,8 +3,8 @@ import './Sidebar.css'
 
 // Dummy data to simulate a stock market watchlist
 const WATCHLIST_DATA = [
-  { id: 1, symbol: 'NIFTY 50', price: '22,514.65', change: '0.45', isUp: true },
-  { id: 2, symbol: 'SENSEX',   price: '74,227.63', change: '-0.50', isUp: false },
+  // { id: 1, symbol: 'NIFTY 50', price: '22,514.65', change: '0.45', isUp: true },
+  // { id: 2, symbol: 'SENSEX',   price: '74,227.63', change: '-0.50', isUp: false },
 //   { id: 3, symbol: 'RELIANCE', price: '2,952.15',  change: '-1.20', isUp: false },
 //   { id: 4, symbol: 'TCS',      price: '3,980.00',  change: '0.85', isUp: true },
 //   { id: 5, symbol: 'INFY',     price: '1,485.30',  change: '-0.30', isUp: false },

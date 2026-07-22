@@ -20,7 +20,7 @@ public class CorsConfig {
 
         config.addAllowedMethod("*");
 
-        config.setAllowCredentials(true);
+        config.setAllowCredentials(true); // cookies , tokens , session info
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();

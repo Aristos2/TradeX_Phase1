@@ -5,17 +5,15 @@ import com.spb.tradeX.dto.LoginResponse;
 import com.spb.tradeX.dto.RegisterRequest;
 import com.spb.tradeX.dto.UserResponse;
 import com.spb.tradeX.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final UserService userService;
-
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/register")
     public UserResponse register(@RequestBody RegisterRequest request) {

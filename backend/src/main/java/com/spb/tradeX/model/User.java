@@ -2,10 +2,15 @@ package com.spb.tradeX.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -14,16 +19,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Existing field (keep for compatibility)
     private String fullName;
 
-    // New profile fields
     private String firstName;
 
     private String lastName;
@@ -42,12 +45,10 @@ public class User {
 
     private String profileImageUrl;
 
-    // Existing project fields
     private BigDecimal walletBalance;
 
     private String role;
 
-    // Audit fields
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -59,7 +60,7 @@ public class User {
         updatedAt = LocalDateTime.now();
 
         if (walletBalance == null) {
-            walletBalance = new BigDecimal("100000");
+            walletBalance = new BigDecimal("10000");
         }
 
         if (role == null) {
@@ -70,5 +71,35 @@ public class User {
     @PreUpdate
     public void onUpdate() {
         updatedAt = LocalDateTime.now();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
