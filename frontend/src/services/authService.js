@@ -1,72 +1,61 @@
-import API_BASE_URL from "./api";
+import api from "./api";
 
 // ==========================
 // Register User
 // ==========================
 export const registerUser = async (userData) => {
-  const response = await fetch(`${API_BASE_URL}/auth/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
-
-  return response.json();
+  try {
+    const response = await api.post("/auth/register", userData);
+    return response.data;
+  } catch (error) {
+    return error.response?.data || { message: "Registration failed" };
+  }
 };
 
 // ==========================
 // Login User
 // ==========================
 export const loginUser = async (loginData) => {
-  const response = await fetch(`${API_BASE_URL}/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(loginData),
-  });
-
-  return response.json();
+  try {
+    const response = await api.post("/auth/login", loginData);
+    return response.data;
+  } catch (error) {
+    return error.response?.data || { message: "Login failed" };
+  }
 };
 
 // ==========================
 // Get Profile
 // ==========================
 export const getProfile = async (userId) => {
-  const response = await fetch(`${API_BASE_URL}/profile/${userId}`);
-  return response.json();
+  try {
+    const response = await api.get(`/profile/${userId}`);
+    return response.data;
+  } catch (error) {
+    return error.response?.data || { message: "Failed to fetch profile" };
+  }
 };
 
 // ==========================
 // Update Profile
 // ==========================
 export const updateProfile = async (userId, profileData) => {
-  const response = await fetch(`${API_BASE_URL}/profile/${userId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(profileData),
-  });
-
-  return response.json();
+  try {
+    const response = await api.put(`/profile/${userId}`, profileData);
+    return response.data;
+  } catch (error) {
+    return error.response?.data || { message: "Failed to update profile" };
+  }
 };
 
 // ==========================
 // Change Password
 // ==========================
 export const changePassword = async (userId, passwordData) => {
-  const response = await fetch(
-    `${API_BASE_URL}/profile/${userId}/password`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(passwordData),
-    }
-  );
-
-  return response.text();
+  try {
+    const response = await api.put(`/profile/${userId}/password`, passwordData);
+    return response.data;
+  } catch (error) {
+    return error.response?.data || "Failed to change password";
+  }
 };
